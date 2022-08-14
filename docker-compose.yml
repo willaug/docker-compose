@@ -1,7 +1,9 @@
 version: '3.8'
+
 services:
   db_pg:
     image: postgres:latest
+    container_name: postgresql
     restart: always
     environment:
       - POSTGRES_USER=willaug
@@ -10,6 +12,21 @@ services:
       - 5432:5432
     volumes: 
       - db_pg:/var/lib/postgresql/data
+
+  db_mongo:
+    image: mongo:4.4.6
+    container_name: mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=willaug
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    ports:
+      - 27017:27017
+    volumes: 
+      - db_mongo:/var/lib/mongodb/data
+
 volumes:
   db_pg:
+    driver: local
+  db_mongo:
     driver: local
