@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db_pg:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=willaug
+      - POSTGRES_PASSWORD=test
+    ports:
+      - 5432:5432
+    volumes: 
+      - db_pg:/var/lib/postgresql/data
+volumes:
+  db_pg:
+    driver: local
